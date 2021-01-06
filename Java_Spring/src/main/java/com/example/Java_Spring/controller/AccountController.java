@@ -1,9 +1,9 @@
-package controller;
+package com.example.Java_Spring.controller;
 
-import entity.Account;
+import com.example.Java_Spring.service.AccountService;
+import com.example.Java_Spring.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import service.AccountService;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class AccountController {
         return accountService.getAll();
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/{id}")
     public Account getAccountById(@RequestParam String id) {
         return accountService.getAccountById(id);
     }
@@ -33,7 +33,7 @@ public class AccountController {
         return accountService.updateAccount(account);
     }
 
-    @DeleteMapping("/deleteAccount")
+    @DeleteMapping("/deleteAccount/{id}")
     public Boolean deleteAccount(@PathVariable("id") String id) {
         return accountService.deleteAccount(id);
     }

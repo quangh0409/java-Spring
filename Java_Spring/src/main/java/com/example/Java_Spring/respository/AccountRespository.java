@@ -1,7 +1,7 @@
-package respository;
+package com.example.Java_Spring.respository;
 
-import entity.Account;
-import helper.AccountMapper;
+import com.example.Java_Spring.helper.AccountMapper;
+import com.example.Java_Spring.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ public class AccountRespository {
     }
 
     public Account getAccountById(String id) {
-        String sql = "SELECT * FROM Account WHERE AccountID = " + id + " ;";
+        String sql = "SELECT * FROM Account WHERE accountID = ? ;";
         Account account = (Account) jdbcTemplate.query(sql, new AccountMapper(), new Object[]{id});
         return account;
     }

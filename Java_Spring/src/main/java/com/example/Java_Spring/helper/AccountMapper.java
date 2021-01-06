@@ -1,6 +1,6 @@
-package helper;
+package com.example.Java_Spring.helper;
 
-import entity.Account;
+import com.example.Java_Spring.entity.Account;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package helper;
+package com.example.Java_Spring.helper;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

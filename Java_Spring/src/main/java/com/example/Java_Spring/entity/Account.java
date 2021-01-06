@@ -1,4 +1,4 @@
-package entity;
+package com.example.Java_Spring.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
