@@ -18,7 +18,7 @@ public class AccountController {
         return accountService.getAll();
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/search")
     public Account getAccountById(@RequestParam String id) {
         return accountService.getAccountById(id);
     }
