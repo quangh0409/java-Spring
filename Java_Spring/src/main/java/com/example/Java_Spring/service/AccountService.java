@@ -27,6 +27,14 @@ public class AccountService {
             return null;
         }
     }
+    public List<Account> email(){
+        try{
+            return accountRespository.email();
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
     public Boolean addAccount(Account account){
         try {
             return  accountRespository.addAccount(account);

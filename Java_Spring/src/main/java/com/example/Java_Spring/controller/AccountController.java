@@ -23,13 +23,18 @@ public class AccountController {
         return accountService.getAccountById(id);
     }
 
+    @GetMapping("/email")
+    public List<Account> email() {
+        return accountService.email();
+    }
+
     @PostMapping("/addAccount")
     public Boolean addAccount(@RequestBody Account account) {
         return accountService.addAccount(account);
     }
 
     @PutMapping("/updateAccount/{id}")
-    public Boolean updateAccount(@PathVariable("id") String id ,@RequestBody Account account) {
+    public Boolean updateAccount(@RequestBody Account account) {
         return accountService.updateAccount(account);
     }
 

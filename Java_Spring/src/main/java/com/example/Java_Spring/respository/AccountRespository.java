@@ -3,6 +3,7 @@ package com.example.Java_Spring.respository;
 import com.example.Java_Spring.helper.AccountMapper;
 import com.example.Java_Spring.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -29,7 +30,11 @@ public class AccountRespository {
         Account account = (Account) jdbcTemplate.queryForObject(sql, new AccountMapper(), new Object[]{id});
         return account;
     }
-
+    public List<Account> email(){
+    String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY email DESC ;" ;
+    List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
+    return list;
+    }
 
     public Boolean addAccount(Account account) {
         // user NameParameterJdbcTemplate
@@ -57,45 +62,25 @@ public class AccountRespository {
     }
 
     public Boolean updateAccount(Account account) {
-////        // cách 1
-//        String sql = "UPDATE Account SET  email=? , display =? , password =? , role =? , avatar =? WHERE accountID =? and deleted = 0 ;";
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("accountID",account.getAccountID());
-//        params.put("email",account.getEmail());
-//        params.put("display",account.getDisplay());
-//        params.put("password",account.getPassword());
-//        params.put("role",account.getRole());
-//        params.put("avatar",account.getAvatar());
-//        namedParameterJdbcTemplate.update(sql,params);
-       String sql = "UPDATE Account SET (email,display,password,role,avatar) VALUES (?,?,?,?,?) WHERE accountID =? and deleted = 0 ;";
-//        Object values[] = new Object[6];
-//
-//        values[0] = account.getEmail();
-//        values[1] = account.getDisplay();
-//        values[2] = account.getPassword();
-//        values[3] = account.getRole();
-//        values[4] = account.getAvatar();
-//        values[5] = account.getAccountID();
-//        jdbcTemplate.update(sql, values);
-//        jdbcTemplate.update(sql,new AccountMapper(), values);
-//        String sql = "UPDATE Account SET  email=? , display =? , password =? , role =? , avatar =? WHERE accountID =? and deleted = 0 ;";
-        Map<String, Object> params = new HashMap<>();
 
-        params.put("email",account.getEmail());
-        params.put("display",account.getDisplay());
-        params.put("password",account.getPassword());
-        params.put("role",account.getRole());
-        params.put("avatar",account.getAvatar());
-        params.put("accountID",account.getAccountID());
-        namedParameterJdbcTemplate.update(sql,params);
+        String sql = "UPDATE Account SET (email,display,password,role,avatar) VALUES(:email,:display,:password,:role,:avatar) WHERE accountID = :accountID and deleted = 0 ;";
+        Map<String, Object> params = new HashMap();
+
+        params.put("email", account.getEmail());
+        params.put("display", account.getDisplay());
+        params.put("password", account.getPassword());
+        params.put("role", account.getRole());
+        params.put("avatar", account.getAvatar());
+        params.put("accountID", account.getAccountID());
+        namedParameterJdbcTemplate.update(sql, params);
 
 
         return true;
     }
 
     public Boolean deleteAccount(String id) {
-        String sql = "DELETE FROM Account WHERE id = " + id + " ;";
-        jdbcTemplate.update(sql, new AccountMapper(), new Object[]{id});
+        String sql = "DELETE FROM Account WHERE accountID =? ;";
+        jdbcTemplate.update(sql, new Object[]{id});
         return true;
     }
 
