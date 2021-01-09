@@ -24,9 +24,18 @@ public class AccountController {
     }
 
     @GetMapping("/email")
-    public List<Account> email() {
-        return accountService.email();
+    public List<Account> email(@RequestParam String str) {
+        return accountService.email(str);
     }
+    @GetMapping("/display")
+    public List<Account> display(@RequestParam String str) {
+        return accountService.display(str);
+    }
+    @GetMapping("/roleStaff")
+    public List<Account> roleStaff(@RequestParam String str) {
+        return accountService.roleStaff(str);
+    }
+
 
     @PostMapping("/addAccount")
     public Boolean addAccount(@RequestBody Account account) {

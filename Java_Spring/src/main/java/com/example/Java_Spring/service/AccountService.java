@@ -27,9 +27,25 @@ public class AccountService {
             return null;
         }
     }
-    public List<Account> email(){
+    public List<Account> email(String str){
         try{
-            return accountRespository.email();
+            return accountRespository.email(str);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    public List<Account> display(String str){
+        try{
+            return accountRespository.display(str);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    public List<Account> roleStaff(String str){
+        try{
+            return accountRespository.roleStaff(str);
         }catch (Exception e){
             System.out.println(e);
             return null;

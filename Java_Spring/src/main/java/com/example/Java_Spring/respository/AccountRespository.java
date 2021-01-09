@@ -30,11 +30,24 @@ public class AccountRespository {
         Account account = (Account) jdbcTemplate.queryForObject(sql, new AccountMapper(), new Object[]{id});
         return account;
     }
-    public List<Account> email(){
-    String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY email DESC ;" ;
+
+    public List<Account> email(String str){
+    String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY email "+ str +" ;" ;
     List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
     return list;
     }
+    public List<Account> display(String str){
+        String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY display "+ str +" ;" ;
+        List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
+        return list;
+    }
+    public List<Account> roleStaff(String str){
+        String sql = " SELECT * FROM Account WHERE role = `STAFF` AND deleted = 0 ORDER BY display  "+ str +" ;" ;
+        List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
+        return list;
+    }
+
+
 
     public Boolean addAccount(Account account) {
         // user NameParameterJdbcTemplate
@@ -63,9 +76,8 @@ public class AccountRespository {
 
     public Boolean updateAccount(Account account) {
 
-        String sql = "UPDATE Account SET (email,display,password,role,avatar) VALUES(:email,:display,:password,:role,:avatar) WHERE accountID = :accountID and deleted = 0 ;";
+        String sql = "UPDATE Account SET email = :email , display = :display , password = :password, role =:role , avatar = :avatar   WHERE accountID = :accountID and deleted = 0 ;";
         Map<String, Object> params = new HashMap();
-
         params.put("email", account.getEmail());
         params.put("display", account.getDisplay());
         params.put("password", account.getPassword());
@@ -73,9 +85,19 @@ public class AccountRespository {
         params.put("avatar", account.getAvatar());
         params.put("accountID", account.getAccountID());
         namedParameterJdbcTemplate.update(sql, params);
-
-
         return true;
+//          String sql = "UPDATE Account SET email = ? , display = ? , password = ? ,role = ? , avatar = ?  WHERE accountID =? and deleted = 0 ;";
+//
+//        Object values[] = new Object[6];
+//
+//        values[0] = account.getEmail();
+//        values[1] = account.getDisplay();
+//        values[2] = account.getPassword();
+//        values[3] = account.getRole();
+//        values[4] = account.getAvatar();
+//        values[5] = account.getAccountID();
+//        jdbcTemplate.update(sql,values);
+//        return true;
     }
 
     public Boolean deleteAccount(String id) {
