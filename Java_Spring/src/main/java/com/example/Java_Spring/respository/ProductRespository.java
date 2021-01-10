@@ -1,6 +1,5 @@
 package com.example.Java_Spring.respository;
 
-import com.example.Java_Spring.entity.Account;
 import com.example.Java_Spring.entity.Product;
 import com.example.Java_Spring.helper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,18 @@ public class ProductRespository {
         String sql = "SELECT * FROM Product WHERE productID = ? and deleted = 0 ;";
         Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});
         return product;
+    }
+
+    public List<Product> display(String str) {
+        String sql = "SELECT * FROM Product WHERE deleted = 0 ORDER BY display " + str + ";";
+        List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
+        return list;
+    }
+
+    public List<Product> priceIn(String str) {
+        String sql = "SELECT * FROM Product WHERE deleted = 0 ORDER BY priceIn " + str + ";";
+        List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
+        return list;
     }
 
     public Boolean addProduct(Product product) {
@@ -67,7 +78,10 @@ public class ProductRespository {
         jdbcTemplate.update(sql, params);
         return true;
     }
-//    public Boolean deleteProduct(String id){
-//        String sql = "SELECT "
-//    }
+
+    public Boolean deleteProduct(String id) {
+        String sql = "DELETE FROM Product WHERE ProductID = ?;";
+        jdbcTemplate.update(sql, new Object[]{id});
+        return true;
+    }
 }

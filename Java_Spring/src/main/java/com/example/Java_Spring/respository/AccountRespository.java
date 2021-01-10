@@ -42,7 +42,7 @@ public class AccountRespository {
         return list;
     }
     public List<Account> roleStaff(String str){
-        String sql = " SELECT * FROM Account WHERE role = `STAFF` AND deleted = 0 ORDER BY display  "+ str +" ;" ;
+        String sql = " SELECT * FROM Account WHERE role = 'STAFF' AND deleted = 0 ORDER BY display "+ str +" ;"  ;
         List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
         return list;
     }
