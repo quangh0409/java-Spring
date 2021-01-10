@@ -21,11 +21,11 @@ public class ProductController {
         return productService.search(id);
     }
     @GetMapping("/display")
-    public List<Product> display(String str){
+    public List<Product> display(@RequestParam String str){
         return productService.display(str);
     }
     @GetMapping("/priceIn")
-    public List<Product> priceIn(String str){
+    public List<Product> priceIn(@RequestParam String str){
         return productService.priceIn(str);
     }
     @GetMapping("/addProduct")
