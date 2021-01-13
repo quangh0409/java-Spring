@@ -25,6 +25,21 @@ public class ProductRespository {
         return product;
     }
 
+    public List<Product> getAll(String type, String sort) {
+        switch (sort) {
+            case "0":
+                String sql = "SELECT * FROM Product WHERE deleted = 0 ORDER BY " + type + " desc ;";
+                List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
+                return list;
+            case "1":
+                String sql1 = "SELECT * FROM Product WHERE deleted = 0 ORDER BY " + type + " asc ;";
+                List<Product> list1 = jdbcTemplate.query(sql1, new ProductMapper());
+                return list1;
+            default:
+                return null;
+        }
+    }
+
     public List<Product> display(String str) {
         String sql = "SELECT * FROM Product WHERE deleted = 0 ORDER BY display " + str + ";";
         List<Product> list = jdbcTemplate.query(sql, new ProductMapper());

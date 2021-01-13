@@ -12,33 +12,55 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+
     @GetMapping("/getAll")
-    public List<Product> getAll(){
-        return  productService.getAll();
+    public List<Product> getAll(@RequestParam(required = false) String type,@RequestParam(required = false) String sort) {
+        if(type!=null && sort != null){
+            return productService.getAll(type, sort );
+        }
+        else {
+            return productService.getAll();
+        }
     }
+
     @GetMapping("/search")
-    public Product getAllById(@RequestParam String id){
+    public Product getAllById(@RequestParam String id) {
         return productService.search(id);
     }
+
     @GetMapping("/display")
-    public List<Product> display(@RequestParam String str){
+    public List<Product> display(@RequestParam String str) {
         return productService.display(str);
     }
+
     @GetMapping("/priceIn")
-    public List<Product> priceIn(@RequestParam String str){
+    public List<Product> priceIn(@RequestParam String str) {
         return productService.priceIn(str);
     }
-    @GetMapping("/addProduct")
-    public Boolean addProduct(@RequestBody Product product){
+
+    @PostMapping("/addProduct")
+    public Boolean addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
-    @GetMapping("/updateProduct/{id}")
-    public Boolean updateProduct(@PathVariable("id") String id,@RequestBody Product product){
-        return productService.updateProduct( product);
+
+    @PutMapping("/updateProduct/{id}")
+    public Boolean updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
+        return productService.updateProduct(product);
     }
-    @GetMapping("/deleteProduct")
-    public Boolean deleteProduct(@PathVariable("id") String id){
+
+    @DeleteMapping("/deleteProduct")
+    public Boolean deleteProduct(@PathVariable("id") String id) {
         return productService.deleteProduct(id);
     }
 
+    // interceptor
+    //filter
+    //servlet
+    //restController
+
+    //
+@GetMapping("/test-ex")
+    public Integer test (@RequestParam Integer input){
+        return input;
+}
 }

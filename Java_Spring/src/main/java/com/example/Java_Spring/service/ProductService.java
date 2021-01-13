@@ -21,51 +21,66 @@ public class ProductService {
             return null;
         }
     }
-    public Product search(String id){
-        try{
+
+    public List<Product> getAll(String type, String sort) {
+        try {
+            return productRespository.getAll(type,sort);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Product search(String id) {
+        try {
             return productRespository.getProductById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
     }
-    public List<Product> display (String str){
-        try{
+
+    public List<Product> display(String str) {
+        try {
             return productRespository.display(str);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
     }
-    public List<Product> priceIn (String str){
-        try{
+
+    public List<Product> priceIn(String str) {
+        try {
             return productRespository.priceIn(str);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
     }
-    public Boolean addProduct(Product product){
-        try{
+
+    public Boolean addProduct(Product product) {
+        try {
             return productRespository.addProduct(product);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
 
         }
     }
-    public Boolean updateProduct(Product product){
-        try{
+
+    public Boolean updateProduct(Product product) {
+        try {
             return productRespository.updateProduct(product);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
     }
-    public Boolean deleteProduct(String id){
+
+    public Boolean deleteProduct(String id) {
         try {
             return productRespository.deleteProduct(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             return false;
         }
