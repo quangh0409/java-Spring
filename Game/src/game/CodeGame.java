@@ -29,7 +29,7 @@ public class CodeGame extends javax.swing.JFrame implements KeyListener {
     /**
      * Creates new form CodeGame
      */
-    private CardLayout cl = new CardLayout();
+
     private int Screensize = 500;
     private int chessSize = 25;
     private int P_x, P_y, end_x, end_y;
@@ -52,41 +52,15 @@ public class CodeGame extends javax.swing.JFrame implements KeyListener {
 
     public CodeGame() {
         initComponents();
-//        cl = (CardLayout) (jPanel3.getLayout());
-//        jPanel3.setLayout(cl);
-//        jPanel3.add("view1", jPanel1);
-//        jPanel3.add("view2", jPanel2);
-//        cl.show(jPanel3, "view2");
-//        jButton1.addActionListener((ae) -> {
-//            if (jTextField1.getText() == "") {
-//                jTextField1.setBorder(BorderUIResource.getBlackLineBorderUIResource());
-//            }
-//            if (jTextField2.getText() == "") {
-//                jTextField2.setBorder(BorderUIResource.getBlackLineBorderUIResource());
-//            } else {
         setAcount(10);
-//                cl.removeLayoutComponent(jPanel2);
-//                cl.show(jPanel3, "view1");
-//        this.add(Clock);
-        this.Clock1();
+       
         this.CreatePlayer();
         this.CreateTaget();
         this.CreateEnemy();
         map();
-        this.addKeyListener(this);
-        switch (checkStatus()) {
-            case 0:
-                removeKeyListener(this);
-                JOptionPane.showMessageDialog(rootPane, "LOSE");
-                break;
-            case 1:
-                removeKeyListener(this);
-                JOptionPane.showMessageDialog(rootPane, "WIN");
-                break;
-            case 2:
-                break;
-
-        }
+        addKeyListener(this);
+        this.Return();
+        this.Clock1();
 
     }
 
@@ -201,10 +175,20 @@ public class CodeGame extends javax.swing.JFrame implements KeyListener {
     }
 
     public void Clock1() {
-Clock.setHorizontalAlignment(JLabel.CENTER);
+        Clock.setHorizontalAlignment(JLabel.CENTER);
         timer.schedule(new CodeGame.UpdateUITask(), 0, 1000);
     }
 
+    public void Return() {
+        ImageIcon icon;
+        icon = new ImageIcon("image/home1.png");
+        jButton2.setIcon(icon);
+//        jButton2.setBounds(jButton2.getLocation().x,jButton2.getLocation().y,jButton2.getSize().width,jButton2.getSize().height);
+//        jButton2.setHorizontalAlignment(jButton2.CENTER);
+     
+    }
+
+  
     private class UpdateUITask extends TimerTask {
 
         int nSeconds = 0;
@@ -300,7 +284,7 @@ Clock.setHorizontalAlignment(JLabel.CENTER);
         getContentPane().add(Clock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
 
         jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 0, 80, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 60, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
