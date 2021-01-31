@@ -2,6 +2,7 @@ package com.example.Java_Spring.respository;
 
 import com.example.Java_Spring.helper.AccountMapper;
 import com.example.Java_Spring.entity.Account;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,22 +32,23 @@ public class AccountRespository {
         return account;
     }
 
-    public List<Account> email(String str){
-    String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY email "+ str +" ;" ;
-    List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
-    return list;
-    }
-    public List<Account> display(String str){
-        String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY display "+ str +" ;" ;
-        List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
-        return list;
-    }
-    public List<Account> roleStaff(String str){
-        String sql = " SELECT * FROM Account WHERE role = 'STAFF' AND deleted = 0 ORDER BY display "+ str +" ;"  ;
-        List<Account> list = jdbcTemplate.query(sql,new AccountMapper());
+    public List<Account> email(String str) {
+        String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY email " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
         return list;
     }
 
+    public List<Account> display(String str) {
+        String sql = " SELECT * FROM Account WHERE deleted = 0 ORDER BY display " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
+        return list;
+    }
+
+    public List<Account> roleStaff(String str) {
+        String sql = " SELECT * FROM Account WHERE role = 'STAFF' AND deleted = 0 ORDER BY display " + str + " ;";
+        List<Account> list = jdbcTemplate.query(sql, new AccountMapper());
+        return list;
+    }
 
 
     public Boolean addAccount(Account account) {
@@ -62,12 +64,12 @@ public class AccountRespository {
 //        namedParameterJdbcTemplate.update(sql,params);
         // JdbcTemppalte
         String sql = "INSERT INTO Account (accountID,email,display,password,role,avatar) VALUES (?,?,?,?,?,?);";
-
+        String hash = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt(12));
         Object values[] = new Object[6];
         values[0] = account.getAccountID();
         values[1] = account.getEmail();
         values[2] = account.getDisplay();
-        values[3] = account.getPassword();
+        values[3] = hash;
         values[4] = account.getRole();
         values[5] = account.getAvatar();
         jdbcTemplate.update(sql, values);
@@ -80,7 +82,7 @@ public class AccountRespository {
         Map<String, Object> params = new HashMap();
         params.put("email", account.getEmail());
         params.put("display", account.getDisplay());
-        params.put("password", account.getPassword());
+        params.put("password", BCrypt.hashpw(account.getPassword(), BCrypt.gensalt(12)));
         params.put("role", account.getRole());
         params.put("avatar", account.getAvatar());
         params.put("accountID", account.getAccountID());
