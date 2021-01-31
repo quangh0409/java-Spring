@@ -14,3 +14,12 @@ public enum Error {
         private String message;
 
 }
+/*
+update priduct set display = .., price= ..., where id = abc
+
+Sql = `update product st id = 'id'`
+conditionSql = `where id = abc `
+if(productDto != null){
+}
+
+ */

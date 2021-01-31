@@ -51,9 +51,15 @@ public class ProductRespository {
         List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
         return list;
     }
+    public Product getProductByName(String display){
+        String sql = "SELECT * FROM Product WHERE LOWER(display) = LOWER(?) AND deleted = 0";
+        Product product = (Product) jdbcTemplate.queryForObject(sql,new ProductMapper(),new Object[]{display});
+        return product;
+    }
+
 
     public Boolean addProduct(Product product) {
-        String sql = "INSERT INTO Product (productID,display,priceIn,priceOut,priceSale,amount,shipday,description,images) VALUES (?,?,?,?,?,?,?,?,?) WHERE deleted = 0;";
+        String sql = "INSERT INTO Product (productID,display,priceIn,priceOut,priceSale,amount,shipday,description,images) VALUES (?,?,?,?,?,?,?,?,?) ;";
         Object params[] = new Object[9];
         params[0] = product.getProductID();
         params[1] = product.getDisplay();
@@ -95,8 +101,9 @@ public class ProductRespository {
     }
 
     public Boolean deleteProduct(String id) {
-        String sql = "DELETE FROM Product WHERE ProductID = ?;";
+        String sql = "DELETE FROM Product WHERE ProductID = ? AND deleted = 0;";
         jdbcTemplate.update(sql, new Object[]{id});
         return true;
     }
+
 }

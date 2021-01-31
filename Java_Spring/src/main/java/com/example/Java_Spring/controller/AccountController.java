@@ -13,7 +13,7 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     public List<Account> getAll() {
         return accountService.getAll();
     }

@@ -13,7 +13,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     public List<Product> getAll(@RequestParam(required = false) String type,@RequestParam(required = false) String sort) {
         if(type!=null && sort != null){
             return productService.getAll(type, sort );
@@ -27,7 +27,10 @@ public class ProductController {
     public Product getAllById(@RequestParam String id) {
         return productService.search(id);
     }
-
+    @GetMapping("/getProductByName")
+    public Product getProductByName(@RequestParam String name){
+        return productService.getProductByName(name);
+    }
     @GetMapping("/display")
     public List<Product> display(@RequestParam String str) {
         return productService.display(str);
@@ -64,3 +67,4 @@ public class ProductController {
         return input;
 }
 }
+

@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74187fde-b8e4-43cb-9d7a-9c3afb6df831" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/exception/ApiExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java_Spring/mvnw.cmd" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/entity/Receipt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/helper/ReceiptMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/respository/ReceiptRespository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/controller/AccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/helper/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/helper/Error.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/respository/ProductRespository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/respository/ProductRespository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/src/main/java/com/example/Java_Spring/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java_Spring/target/classes/com/example/Java_Spring/controller/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/target/classes/com/example/Java_Spring/controller/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java_Spring/target/classes/com/example/Java_Spring/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java_Spring/target/classes/com/example/Java_Spring/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java_Spring/target/test-classes/com/example/Java_Spring/JavaSpringApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

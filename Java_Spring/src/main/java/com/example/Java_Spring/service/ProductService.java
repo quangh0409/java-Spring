@@ -39,6 +39,14 @@ public class ProductService {
             return null;
         }
     }
+    public Product getProductByName(String display){
+        try {
+            return productRespository.getProductByName(display);
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 
     public List<Product> display(String str) {
         try {
