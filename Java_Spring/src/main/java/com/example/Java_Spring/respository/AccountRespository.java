@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Repository
 public class AccountRespository {
@@ -66,7 +67,7 @@ public class AccountRespository {
         String sql = "INSERT INTO Account (accountID,email,display,password,role,avatar) VALUES (?,?,?,?,?,?);";
         String hash = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt(12));
         Object values[] = new Object[6];
-        values[0] = account.getAccountID();
+        values[0] =  UUID.randomUUID().toString();
         values[1] = account.getEmail();
         values[2] = account.getDisplay();
         values[3] = hash;
