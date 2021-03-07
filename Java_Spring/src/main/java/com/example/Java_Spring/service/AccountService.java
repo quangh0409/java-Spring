@@ -62,7 +62,7 @@ public class AccountService {
 //            if (accountRespository.getAccountById(account.getAccountID()) != null) {
 //                return false;
 //            } else {
-                return accountRespository.addAccount(account);
+            return accountRespository.addAccount(account);
 //            }
         } catch (Exception e) {
             System.out.println(e);
@@ -86,5 +86,9 @@ public class AccountService {
             System.out.println(e);
             return false;
         }
+    }
+
+    public Account getAccountByEmailAndPassword(String email, String password) {
+        return accountRespository.getAccountByEmailAndPassword(email, password);
     }
 }

@@ -39,7 +39,6 @@ public class ReceiptDetailRespository {
           jdbcTemplate.update(sql,param);
 
       }
-
       jdbcTemplate.update(sql0,id,receipt.getAccountID(),receipt.getTotal_money(),receipt.getStatus());
       return true;
     }

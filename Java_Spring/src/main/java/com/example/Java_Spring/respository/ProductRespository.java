@@ -18,7 +18,15 @@ public class ProductRespository {
         List<Product> list = jdbcTemplate.query(sql, new ProductMapper());
         return list;
     }
-
+    public List<Product> getProductPage(int limit , int offset){
+        String sql = "SELECT * FROM Product LIMIT ? OFFSET ? ;";
+        List<Product> list = jdbcTemplate.query(sql, new ProductMapper(),new Object[]{limit,offset});
+        return list;
+    }
+    public Integer countProduct(){
+        String sql = "SELECT COUNT (productID) FROM Product ;";
+                return jdbcTemplate.queryForObject(sql,Integer.class);
+    }
     public Product getProductById(String id) {
         String sql = "SELECT * FROM Product WHERE productID = ? and deleted = 0 ;";
         Product product = (Product) jdbcTemplate.queryForObject(sql, new ProductMapper(), new Object[]{id});

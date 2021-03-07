@@ -1,5 +1,6 @@
 package com.example.Java_Spring.respository;
 
+import com.example.Java_Spring.exception.ApiException;
 import com.example.Java_Spring.helper.AccountMapper;
 import com.example.Java_Spring.entity.Account;
 import org.mindrot.jbcrypt.BCrypt;
@@ -67,7 +68,7 @@ public class AccountRespository {
         String sql = "INSERT INTO Account (accountID,email,display,password,role,avatar) VALUES (?,?,?,?,?,?);";
         String hash = BCrypt.hashpw(account.getPassword(), BCrypt.gensalt(12));
         Object values[] = new Object[6];
-        values[0] =  UUID.randomUUID().toString();
+        values[0] = UUID.randomUUID().toString();
         values[1] = account.getEmail();
         values[2] = account.getDisplay();
         values[3] = hash;
@@ -107,6 +108,17 @@ public class AccountRespository {
         String sql = "DELETE FROM Account WHERE accountID =? ;";
         jdbcTemplate.update(sql, new Object[]{id});
         return true;
+    }
+
+    public Account getAccountByEmailAndPassword(String email, String password) {
+        String sql = "Select * from account where email = ? and password = ? limit 1";
+        System.out.println("account repo");
+        List<Account> res = jdbcTemplate.query(sql, new AccountMapper(), new Object[]{email, password});
+        if (res.size() == 0) {
+            return null;
+        } else {
+            return res.get(0);
+        }
     }
 
 }

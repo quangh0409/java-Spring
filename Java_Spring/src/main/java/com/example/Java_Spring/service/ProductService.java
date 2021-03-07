@@ -1,5 +1,7 @@
 package com.example.Java_Spring.service;
 
+import com.example.Java_Spring.dto.ListProductWithPagination;
+import com.example.Java_Spring.dto.Pagination;
 import com.example.Java_Spring.entity.Product;
 import com.example.Java_Spring.respository.ProductRespository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,27 @@ public class ProductService {
             return null;
         }
     }
+    public ListProductWithPagination getProductPage(int size , int page){
+        int limit = size ;
+        int offset = (page -1)*size;
+        try {
+        List<Product> data = productRespository.getProductPage(limit,offset);
 
+
+
+            int totalItem = productRespository.countProduct();
+             int totalPage ;
+             if(totalItem % size == 0){
+                 totalPage = totalItem / size;
+             }else {
+                 totalPage = totalItem / size + 1;
+             }
+            Pagination pagination = new Pagination(totalPage, data.size() , size);
+             return new ListProductWithPagination(data,pagination);
+        }catch (Exception e){
+            return null;
+        }
+    }
     public List<Product> getAll(String type, String sort) {
         try {
             return productRespository.getAll(type,sort);
